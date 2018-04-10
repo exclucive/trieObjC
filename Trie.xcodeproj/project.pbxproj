@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F8FB6D5207C836B00106E01 /* NSString+Trie.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8FB6D3207C836B00106E01 /* NSString+Trie.m */; };
 		BBBF4714207C490200AD46D3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BBBF4713207C490200AD46D3 /* AppDelegate.m */; };
 		BBBF4717207C490200AD46D3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBBF4716207C490200AD46D3 /* ViewController.m */; };
 		BBBF471A207C490200AD46D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBBF4718207C490200AD46D3 /* Main.storyboard */; };
@@ -17,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8F8FB6D3207C836B00106E01 /* NSString+Trie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Trie.m"; sourceTree = "<group>"; };
+		8F8FB6D4207C836B00106E01 /* NSString+Trie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Trie.h"; sourceTree = "<group>"; };
 		BBBF470F207C490200AD46D3 /* Trie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBBF4712207C490200AD46D3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BBBF4713207C490200AD46D3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -61,6 +64,8 @@
 		BBBF4711207C490200AD46D3 /* Trie */ = {
 			isa = PBXGroup;
 			children = (
+				8F8FB6D4207C836B00106E01 /* NSString+Trie.h */,
+				8F8FB6D3207C836B00106E01 /* NSString+Trie.m */,
 				BBBF4712207C490200AD46D3 /* AppDelegate.h */,
 				BBBF4713207C490200AD46D3 /* AppDelegate.m */,
 				BBBF4715207C490200AD46D3 /* ViewController.h */,
@@ -150,6 +155,7 @@
 				BBBF472A207C492C00AD46D3 /* Trie.m in Sources */,
 				BBBF4722207C490400AD46D3 /* main.m in Sources */,
 				BBBF4714207C490200AD46D3 /* AppDelegate.m in Sources */,
+				8F8FB6D5207C836B00106E01 /* NSString+Trie.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

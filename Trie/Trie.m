@@ -7,10 +7,11 @@
 //
 
 #import "Trie.h"
+#import "NSString+Trie.h"
 
 @interface TrieNode: NSObject
 
-@property (nonatomic, assign) char data;
+@property (nonatomic, strong) NSString *data;
 @property (nonatomic, strong) NSMutableDictionary *children;
 @property (nonatomic, assign) BOOL isTerminating;
 
@@ -18,11 +19,21 @@
 
 @implementation TrieNode
 
-- (instancetype)init:(char)data terminating:(BOOL)terminating {
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _children = [NSMutableDictionary dictionary];
+    }
+    return self;
+}
+
+- (instancetype)init:(NSString *)data terminating:(BOOL)terminating {
     self = [super init];
     if (self) {
         _data = data;
         _isTerminating = terminating;
+        _children = [NSMutableDictionary dictionary];
     }
     return self;
 }
@@ -46,20 +57,19 @@
 }
 
 - (TrieNode *)lastNodeForWord:(NSString *)word {
-    const char *characters = [word UTF8String];
-    int lettersCount = sizeof(characters);
+    NSArray *characters = [word arrayOfLetters];
     TrieNode *currentNode = self.root;
     int counter = 0;
     
-    while (counter < lettersCount) {
-        NSNumber *c = @(characters[counter]);
+    while (counter < characters.count) {
+        NSString *c = characters[counter];
         
         TrieNode *tmpNode = currentNode.children[c];
         if (tmpNode) {
             currentNode = tmpNode;
         }
         else {
-            break;
+            return nil;
         }
         
         counter++;
@@ -69,24 +79,22 @@
 }
 
 - (void)addNewWord:(NSString *)word {
-    const char *characters = [word UTF8String];
-    int lettersCount = sizeof(characters);
+    NSArray *characters = [word arrayOfLetters];
     
     TrieNode *currentNode = self.root;
     int counter = 0;
     
-    while (counter < lettersCount) {
-        char c = characters[counter];
-        NSNumber *cObj = @(c);
+    while (counter < characters.count) {
+        NSString *c = characters[counter];
         
-        TrieNode *tmpNode = currentNode.children[cObj];
+        TrieNode *tmpNode = currentNode.children[c];
         if (tmpNode) {
             currentNode = tmpNode;
         }
         else {
-            BOOL terminating = (counter == lettersCount - 1) ? YES : NO;
+            BOOL terminating = (counter == characters.count - 1) ? YES : NO;
             TrieNode *newNode = [[TrieNode alloc] init:c terminating:terminating];
-            [currentNode.children setObject:newNode forKey:cObj];
+            [currentNode.children setObject:newNode forKey:c];
             currentNode = newNode;
         }
         counter++;
@@ -98,7 +106,7 @@
     
     NSUInteger numberOfWords = [self numberOfWordsForNode:lastNode];
     if (lastNode.isTerminating) {
-        numberOfWords += 1; 
+        numberOfWords += 1;
     }
     
     return numberOfWords;
@@ -112,7 +120,7 @@
         if (child.isTerminating) {
             numberOfWords += 1;
         }
-        numberOfWords = [self numberOfWordsForNode:child];
+        numberOfWords += [self numberOfWordsForNode:child];
     }
     
     return numberOfWords;
