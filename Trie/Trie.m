@@ -7,7 +7,6 @@
 //
 
 #import "Trie.h"
-#import "NSString+Trie.h"
 
 @interface TrieNode: NSObject
 
@@ -57,12 +56,12 @@
 }
 
 - (TrieNode *)lastNodeForWord:(NSString *)word {
-    NSArray *characters = [word arrayOfLetters];
+    char *characters = [word UTF8String];
     TrieNode *currentNode = self.root;
     int counter = 0;
     
-    while (counter < characters.count) {
-        NSString *c = characters[counter];
+    while (counter < word.length) {
+        NSString *c = [NSString stringWithFormat:@"%c", characters[counter]];
         
         TrieNode *tmpNode = currentNode.children[c];
         if (tmpNode) {
@@ -79,20 +78,20 @@
 }
 
 - (void)addNewWord:(NSString *)word {
-    NSArray *characters = [word arrayOfLetters];
+    char *characters = [word UTF8String];
     
     TrieNode *currentNode = self.root;
     int counter = 0;
     
-    while (counter < characters.count) {
-        NSString *c = characters[counter];
+    while (counter < word.length) {
+        NSString *c = [NSString stringWithFormat:@"%c", characters[counter]];
         
         TrieNode *tmpNode = currentNode.children[c];
         if (tmpNode) {
             currentNode = tmpNode;
         }
         else {
-            BOOL terminating = (counter == characters.count - 1) ? YES : NO;
+            BOOL terminating = (counter == word.length - 1) ? YES : NO;
             TrieNode *newNode = [[TrieNode alloc] init:c terminating:terminating];
             [currentNode.children setObject:newNode forKey:c];
             currentNode = newNode;
